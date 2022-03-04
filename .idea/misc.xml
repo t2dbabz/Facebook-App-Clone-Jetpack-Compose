@@ -3,9 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/tunde/JetpackComposeProjects/FacebookClone/app/src/main/res/drawable/ic_baseline_home.xml" value="0.1" />
+        <entry key="..\:/Users/tunde/JetpackComposeProjects/FacebookClone/app/src/main/res/drawable/ic_baseline_more.xml" value="0.131" />
+        <entry key="..\:/Users/tunde/JetpackComposeProjects/FacebookClone/app/src/main/res/drawable/ic_friends.xml" value="0.131" />
         <entry key="..\:/Users/tunde/JetpackComposeProjects/FacebookClone/app/src/main/res/drawable/ic_home.xml" value="0.1" />
+        <entry key="..\:/Users/tunde/JetpackComposeProjects/FacebookClone/app/src/main/res/drawable/ic_home_4_line.xml" value="0.131" />
+        <entry key="..\:/Users/tunde/JetpackComposeProjects/FacebookClone/app/src/main/res/drawable/ic_media.xml" value="0.1" />
         <entry key="..\:/Users/tunde/JetpackComposeProjects/FacebookClone/app/src/main/res/drawable/ic_menu.xml" value="0.131" />
+        <entry key="..\:/Users/tunde/JetpackComposeProjects/FacebookClone/app/src/main/res/drawable/ic_notification.xml" value="0.131" />
         <entry key="..\:/Users/tunde/JetpackComposeProjects/FacebookClone/app/src/main/res/drawable/ic_profile.xml" value="0.131" />
+        <entry key="..\:/Users/tunde/JetpackComposeProjects/FacebookClone/app/src/main/res/drawable/ic_watch.xml" value="0.131" />
       </map>
     </option>
   </component>

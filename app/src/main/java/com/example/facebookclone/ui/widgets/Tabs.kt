@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
 
@@ -23,15 +24,19 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
             TabRowDefaults.Indicator(
                 Modifier.pagerTabIndicatorOffset(pagerState, tabPositions),
                 color = Color.Blue
-            )}
+            )},
+        divider = {
+            TabRowDefaults.Divider(thickness = 0.3.dp, color = Color.DarkGray)
+        }
     ) {
         tabs.forEachIndexed {index, tab->
             val selected = pagerState.currentPage == index
 
             Tab(
-                icon = { Icon(painter = painterResource(id = tab.icon), contentDescription = tab.title, tint = if (selected) Color.Blue else Color.Black) },
+                icon = { Icon(painter = painterResource(id = tab.icon), contentDescription = tab.title, tint = if (selected) Color.Blue else Color.DarkGray) },
                 selected = selected,
                 onClick = {
+                    tab
                     scope.launch {
                         pagerState.animateScrollToPage(index)
                     }
