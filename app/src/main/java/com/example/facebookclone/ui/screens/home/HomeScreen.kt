@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.outlined.ThumbUp
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -117,7 +120,7 @@ fun PostItem() {
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         Text(text = "1h", fontSize = 10.sp)
-                        Text(text = ".",  )
+                        Text(text = ".", textAlign = TextAlign.Justify )
                         Icon(
                             painter = painterResource(id = R.drawable.ic_earth),
                             contentDescription = "Earth",
@@ -146,12 +149,62 @@ fun PostItem() {
                 .fillMaxWidth()
                 .height(350.dp), contentScale = ContentScale.Crop, )
 
+            Row(modifier = Modifier.padding(10.dp)){
+                Text(text = "100 comments", modifier = Modifier.weight(1f))
+                Text(text = "2.8M views", modifier = Modifier.weight(1f), textAlign = TextAlign.End)
+
+            }
+
+            Divider(modifier = Modifier.padding(start = 5.dp , end = 5.dp, bottom = 5.dp), thickness = 1.5.dp)
+
+            Row() {
+                TextButton(
+                    onClick = {
+                        // do something here
+                    },
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.ThumbUp,
+                        contentDescription = "Localized description",
+                        modifier = Modifier.padding(end = 8.dp),
+                        tint = Color.LightGray
+                    )
+                    Text(text = "Like", color = Color.DarkGray)
+                }
+
+                TextButton(
+                    onClick = {
+                        // do something here
+                    },
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_chat_4),
+                        contentDescription = "Localized description",
+                        modifier = Modifier.padding(end = 8.dp),
+                        tint = Color.LightGray
+                    )
+                    Text(text = "Comment", color = Color.DarkGray)
+                }
 
 
+                TextButton(
+                    onClick = {
+                        // do something here
+                    },
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_share_forward_line),
+                        contentDescription = "Localized description",
+                        modifier = Modifier.padding(end = 8.dp),
+                        tint = Color.LightGray
+                    )
+                    Text(text = "Share", color = Color.DarkGray)
+                }
+            }
         }
-
-
-
 
     }
 
@@ -166,7 +219,7 @@ fun PostItem() {
 @Composable
 @Preview
 fun HomeScreenPreview() {
-    HomeScreen()
+    PostItem()
 }
 
 //@Composable
