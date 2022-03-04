@@ -2,13 +2,14 @@ package com.example.facebookclone.ui.widgets
 
 import androidx.compose.runtime.Composable
 import com.example.facebookclone.R
+import com.example.facebookclone.ui.screens.home.HomeScreen
 
 typealias ComposableFun = @Composable () -> Unit
-sealed class TabItem (val icon: Int, val title: String, val screen: ComposableFun) {
-    object Home: TabItem(R.drawable.ic_home, "Home", {})
-    object Friends: TabItem(R.drawable.ic_friends, "Friends", {})
-    object Watch: TabItem(R.drawable.ic_watch, "Watch", {})
-    object Profile: TabItem(R.drawable.ic_profile, "Profile", {})
-    object Notification: TabItem(R.drawable.ic_notification, "Notifications", {})
-    object Menu: TabItem(R.drawable.ic_menu, "Menu", {})
+sealed class TabItem (var icon: Int, var title: String, var screen: ComposableFun) {
+    object Home: TabItem(R.drawable.ic_home, "Home", { HomeScreen() })
+    object Friends: TabItem(R.drawable.ic_friends, "Friends", { HomeScreen()})
+    object Watch: TabItem(R.drawable.ic_watch, "Watch", { HomeScreen()})
+    object Profile: TabItem(R.drawable.ic_profile, "Profile", { HomeScreen()})
+    object Notification: TabItem(R.drawable.ic_notification, "Notifications", { HomeScreen()})
+    object Menu: TabItem(R.drawable.ic_menu, "Menu", { HomeScreen()})
 }

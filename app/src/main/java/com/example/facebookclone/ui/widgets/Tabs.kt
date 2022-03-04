@@ -18,23 +18,25 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
     TabRow(
         selectedTabIndex = pagerState.currentPage,
         backgroundColor = Color.White,
-        contentColor = Color.Blue,
+        contentColor = Color.Black,
         indicator = { tabPositions ->
             TabRowDefaults.Indicator(
-                Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
+                Modifier.pagerTabIndicatorOffset(pagerState, tabPositions),
+                color = Color.Blue
             )}
     ) {
         tabs.forEachIndexed {index, tab->
+            val selected = pagerState.currentPage == index
 
             Tab(
-                icon = { Icon(painter = painterResource(id = tab.icon), contentDescription = tab.title, tint = Color.DarkGray) },
-                selected = pagerState.currentPage == index,
+                icon = { Icon(painter = painterResource(id = tab.icon), contentDescription = tab.title, tint = if (selected) Color.Blue else Color.Black) },
+                selected = selected,
                 onClick = {
                     scope.launch {
                         pagerState.animateScrollToPage(index)
                     }
-                }
-            )
+                },
+                enabled = true)
         }
 
     }
@@ -77,6 +79,7 @@ fun TabsContentPreview() {
         TabItem.Menu
     )
     val pagerState = rememberPagerState()
+    Tabs(tabs = tabs, pagerState =pagerState )
     TabsContent(tabs = tabs, pagerState = pagerState)
 }
 
