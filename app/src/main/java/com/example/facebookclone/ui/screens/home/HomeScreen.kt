@@ -28,10 +28,10 @@ import androidx.compose.ui.unit.sp
 import com.example.facebookclone.R
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navigateToPostScreen: (Int) ->Unit) {
     LazyColumn(modifier = Modifier.fillMaxSize(),content ={
         item {
-            AddPostContent()
+            AddPostContent(navigateToPostScreen = navigateToPostScreen)
 
         }
 
@@ -45,14 +45,18 @@ fun HomeScreen() {
 
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AddPostContent() {
+fun AddPostContent(navigateToPostScreen: (Int) -> Unit) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
             .height(75.dp),
         color = Color.White,
-        shape = RectangleShape
+        shape = RectangleShape,
+        onClick = {
+            navigateToPostScreen(-1)
+        }
     ) {
         Row(modifier = Modifier.padding(5.dp),verticalAlignment = Alignment.CenterVertically) {
             Image(
@@ -113,7 +117,7 @@ fun PostItem() {
                     .padding(start = 5.dp)
                     .weight(8f)) {
 
-                   Text(text = "Babatunde Owoleke Babatunde owoleke", style = MaterialTheme.typography.subtitle2)
+                   Text(text = "Babatunde Owoleke", style = MaterialTheme.typography.subtitle2)
 
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -219,7 +223,7 @@ fun PostItem() {
 @Composable
 @Preview
 fun HomeScreenPreview() {
-    PostItem()
+   HomeScreen({})
 }
 
 //@Composable

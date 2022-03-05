@@ -8,6 +8,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.facebookclone.ui.screens.friends.FriendsScreen
+import com.example.facebookclone.ui.screens.home.HomeScreen
+import com.example.facebookclone.ui.screens.menu.MenuScreen
+import com.example.facebookclone.ui.screens.notification.NotificationScreen
+import com.example.facebookclone.ui.screens.profile.ProfileScreen
+import com.example.facebookclone.ui.screens.watch.WatchScreen
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
 
@@ -49,9 +55,16 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun TabsContent(tabs: List<TabItem>, pagerState: PagerState) {
+fun TabsContent(tabs: List<TabItem>, pagerState: PagerState, navigateToPost: (Int) -> Unit) {
     HorizontalPager(count = tabs.size, state = pagerState) { page ->
-        tabs[page].screen()
+        when(page) {
+                0 -> HomeScreen (navigateToPostScreen = navigateToPost )
+                1 -> FriendsScreen()
+                2 -> WatchScreen()
+                3 -> ProfileScreen()
+                4 -> NotificationScreen()
+                5-> MenuScreen()
+        }
     }
 }
 
@@ -85,6 +98,6 @@ fun TabsContentPreview() {
     )
     val pagerState = rememberPagerState()
     Tabs(tabs = tabs, pagerState =pagerState )
-    TabsContent(tabs = tabs, pagerState = pagerState)
+    TabsContent(tabs = tabs, pagerState = pagerState, {})
 }
 
