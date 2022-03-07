@@ -14,6 +14,7 @@ import com.example.facebookclone.ui.screens.menu.MenuScreen
 import com.example.facebookclone.ui.screens.notification.NotificationScreen
 import com.example.facebookclone.ui.screens.profile.ProfileScreen
 import com.example.facebookclone.ui.screens.watch.WatchScreen
+import com.example.facebookclone.ui.viewmodel.SharedViewModel
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
 
@@ -55,10 +56,10 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun TabsContent(tabs: List<TabItem>, pagerState: PagerState, navigateToPost: (Int) -> Unit) {
+fun TabsContent(tabs: List<TabItem>, pagerState: PagerState, navigateToPost: (Int) -> Unit, sharedViewModel: SharedViewModel) {
     HorizontalPager(count = tabs.size, state = pagerState) { page ->
         when(page) {
-                0 -> HomeScreen (navigateToPostScreen = navigateToPost )
+                0 -> HomeScreen (navigateToPostScreen = navigateToPost, sharedViewModel = sharedViewModel )
                 1 -> FriendsScreen()
                 2 -> WatchScreen()
                 3 -> ProfileScreen()
@@ -84,20 +85,20 @@ fun TabsPreview() {
     Tabs(tabs = tabs, pagerState = pagerState)
 }
 
-@OptIn(ExperimentalPagerApi::class)
-@Preview(showBackground = true)
-@Composable
-fun TabsContentPreview() {
-    val tabs = listOf(
-        TabItem.Home,
-        TabItem.Friends,
-        TabItem.Watch,
-        TabItem.Profile,
-        TabItem.Notification,
-        TabItem.Menu
-    )
-    val pagerState = rememberPagerState()
-    Tabs(tabs = tabs, pagerState =pagerState )
-    TabsContent(tabs = tabs, pagerState = pagerState, {})
-}
+//@OptIn(ExperimentalPagerApi::class)
+//@Preview(showBackground = true)
+//@Composable
+//fun TabsContentPreview() {
+//    val tabs = listOf(
+//        TabItem.Home,
+//        TabItem.Friends,
+//        TabItem.Watch,
+//        TabItem.Profile,
+//        TabItem.Notification,
+//        TabItem.Menu
+//    )
+//    val pagerState = rememberPagerState()
+//    Tabs(tabs = tabs, pagerState =pagerState )
+//    TabsContent(tabs = tabs, pagerState = pagerState,)
+//}
 

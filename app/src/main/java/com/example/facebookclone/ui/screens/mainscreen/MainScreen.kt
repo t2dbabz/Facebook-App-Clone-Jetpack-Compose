@@ -5,6 +5,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.facebookclone.ui.viewmodel.SharedViewModel
 import com.example.facebookclone.ui.widgets.AppBar
 import com.example.facebookclone.ui.widgets.TabItem
 import com.example.facebookclone.ui.widgets.Tabs
@@ -14,7 +15,7 @@ import com.google.accompanist.pager.rememberPagerState
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalPagerApi::class)
 @Composable
-fun MainScreen(navigateToPostScreen: (Int) -> Unit) {
+fun MainScreen(navigateToPostScreen: (Int) -> Unit, sharedViewModel: SharedViewModel) {
     val tabs = listOf(TabItem.Home, TabItem.Friends, TabItem.Watch, TabItem.Profile, TabItem.Notification, TabItem.Menu)
     val pagerState = rememberPagerState()
     Scaffold(
@@ -22,7 +23,12 @@ fun MainScreen(navigateToPostScreen: (Int) -> Unit) {
     ) {
         Column {
             Tabs(tabs = tabs, pagerState = pagerState)
-            TabsContent(tabs = tabs, pagerState = pagerState, navigateToPostScreen)
+            TabsContent(
+                tabs = tabs,
+                pagerState = pagerState,
+                navigateToPostScreen,
+                sharedViewModel = sharedViewModel
+            )
         }
     }
 }
@@ -31,5 +37,5 @@ fun MainScreen(navigateToPostScreen: (Int) -> Unit) {
 @Composable
 @Preview
 fun MainScreenPreview() {
-    MainScreen({})
+    //MainScreen({})
 }

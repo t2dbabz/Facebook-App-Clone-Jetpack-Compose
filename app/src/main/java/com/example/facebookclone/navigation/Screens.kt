@@ -6,8 +6,8 @@ import com.example.facebookclone.util.Constants.HOME_SCREEN
 
 class Screens(navController: NavHostController){
 
-    val mainscreen: (Action) -> Unit = { action ->
-        navController.navigate(route = "screen/${action.name}"){
+    val home: (Action) -> Unit = { action ->
+        navController.navigate(route = "home/${action.name}"){
             popUpTo(HOME_SCREEN) {
                 inclusive = true
             }
@@ -20,5 +20,17 @@ class Screens(navController: NavHostController){
         navController.navigate(route = "post/$postId")
 
     }
+
+    val mainScreen: (Action) -> Unit = { action ->
+        navController.navigate(route = "screen/${action.name}"){
+            popUpTo(HOME_SCREEN) {
+                inclusive = true
+            }
+
+        }
+
+    }
+
+
 
 }

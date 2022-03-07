@@ -1,4 +1,4 @@
-package com.example.facebookclone.ui.screens.home
+package com.example.facebookclone.ui.screens.post
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,9 +14,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.facebookclone.R
+import com.example.facebookclone.ui.theme.postItemTextColor
 
 @Composable
-fun CreatePostContent() {
+fun CreatePostContent(
+    status: String,
+    onStatusChanged: (String) -> Unit
+) {
     Column(modifier = Modifier
         .fillMaxSize()
         .background(MaterialTheme.colors.background)) {
@@ -36,17 +40,21 @@ fun CreatePostContent() {
                 .padding(start = 5.dp)
                 .weight(8f)) {
 
-                Text(text = "Babatunde Owoleke Babatunde owoleke", style = MaterialTheme.typography.subtitle2)
+                Text(
+                    text = "Babatunde Owoleke",
+                    style = MaterialTheme.typography.subtitle2,
+                    color = MaterialTheme.colors.postItemTextColor
+                )
 
             }
         }
         
         OutlinedTextField(
             modifier = Modifier.fillMaxSize(),
-            value = "",
-            onValueChange = {},
+            value = status,
+            onValueChange = {onStatusChanged(it)},
             placeholder = {
-                Text(text = "What's on your Mind?")
+                Text(text = "What's on your Mind?", color = MaterialTheme.colors.postItemTextColor)
             },
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = Color.White,
@@ -60,5 +68,5 @@ fun CreatePostContent() {
 @Composable
 @Preview
 fun CreatePostContentPreview() {
-    CreatePostContent()
+    CreatePostContent("", {})
 }

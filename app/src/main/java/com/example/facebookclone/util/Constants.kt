@@ -7,6 +7,8 @@ object Constants {
 
     const val HOME_SCREEN = "home/{action}"
     const val POST_SCREEN = "post/{postId}"
+    const val MAIN_SCREEN = "main_screen/{action}"
+
 
     const val HOME_ARGUMENT_KEY = "action"
     const val POST_ARGUMENT_KEY = "postId"

@@ -3,6 +3,7 @@ package com.example.facebookclone.data.model
 import androidx.annotation.DrawableRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.facebookclone.R
 import com.example.facebookclone.util.Constants.DATABASE_TABLE
 
 
@@ -11,19 +12,19 @@ data class Post(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
-    val name: String,
+    val name: String = "Babatunde Owoleke",
     @DrawableRes
-    val profilePicture: Int,
+    val profilePicture: Int = R.drawable.profile_image,
 
     val status: String,
 
     @DrawableRes
-    val postImage: Int,
+    val postImage: Int = R.drawable.test_image,
 
-    val time: String,
+    val time: String = "1h",
 
-    val comments: String,
+    val comments: String = "10 Comments",
 
-    val views: String
+    val views: String = "500 Views"
 
 )
