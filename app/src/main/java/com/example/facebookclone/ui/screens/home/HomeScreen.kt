@@ -48,7 +48,7 @@ fun HomeScreen(
     val allTasks by sharedViewModel.allPosts.collectAsState()
 
     val action by sharedViewModel.action
-   
+
     sharedViewModel.handleDatabaseActions(action)
     LazyColumn(modifier = Modifier.fillMaxSize(),content ={
         item {
@@ -152,7 +152,7 @@ fun PostItem(post: Post, navigateToPostDetailScreen: (Int) -> Unit) {
 
                    Text(
                        text = post.name,
-                       style = MaterialTheme.typography.subtitle2,
+                       style = MaterialTheme.typography.h6,
                        color = MaterialTheme.colors.postItemTextColor,
                        fontWeight = FontWeight.Bold
                    )
@@ -160,14 +160,14 @@ fun PostItem(post: Post, navigateToPostDetailScreen: (Int) -> Unit) {
                         verticalAlignment = Alignment.Top,
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        Text(text =post.time, fontSize = 10.sp, color = Color.DarkGray)
+                        Text(text =post.time, fontSize = 12.sp, color = Color.DarkGray)
                         Text(text = '\u00B7'.toString(), fontSize = 10.sp, color = Color.DarkGray, modifier = Modifier.padding(start = 2.dp), fontWeight = FontWeight.ExtraBold)
                         Icon(
                             painter = painterResource(id = R.drawable.ic_earth),
                             contentDescription = "Earth",
                             modifier = Modifier
                                 .padding(start = 5.dp)
-                                .size(10.dp)
+                                .size(12.dp)
                         )
                     }
                 }

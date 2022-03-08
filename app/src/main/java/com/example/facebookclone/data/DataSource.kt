@@ -17,7 +17,7 @@ object DataSource {
                 views = "2.5k Views"
             ),
             Post(
-                name = "scarlett johansson",
+                name = "Scarlett Johansson",
                 profilePicture = R.drawable.profile_pic_2,
                 status = "New Year, New Me, New Goals, Let's Go",
                 postImage = R.drawable.profile_pic_2,
