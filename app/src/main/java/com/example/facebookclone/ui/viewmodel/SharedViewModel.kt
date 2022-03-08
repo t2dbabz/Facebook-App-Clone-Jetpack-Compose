@@ -1,15 +1,18 @@
 package com.example.facebookclone.ui.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.facebookclone.data.DataSource
 import com.example.facebookclone.data.model.Post
 import com.example.facebookclone.repository.PostRepository
 import com.example.facebookclone.util.Action
 import com.example.facebookclone.util.RequestState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -20,7 +23,16 @@ import javax.inject.Inject
 @HiltViewModel
 class SharedViewModel @Inject constructor (val repository: PostRepository) : ViewModel() {
 
+    init {
+        viewModelScope.launch {
+            val posts = DataSource.post()
+            for (post in posts) {
+                delay(1000)
+                repository.addPost(post)
+            }
+        }
 
+    }
     private val _allPosts =
         MutableStateFlow<RequestState<List<Post>>>(RequestState.Idle)
 
@@ -56,7 +68,6 @@ class SharedViewModel @Inject constructor (val repository: PostRepository) : Vie
     fun getSelectedPost(postId: Int) {
         viewModelScope.launch {
             repository.getSelectedPost(postId).collect {post ->
-
                 _selectedPost.value = post
             }
         }
@@ -73,6 +84,17 @@ class SharedViewModel @Inject constructor (val repository: PostRepository) : Vie
         }
     }
 
+    private fun deletePost() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val post = Post(
+                id = id.value,
+                status = status.value
+            )
+
+            repository.deletePost(post)
+        }
+    }
+
     fun handleDatabaseActions(action: Action) {
         when (action) {
             Action.ADD -> {
@@ -84,7 +106,7 @@ class SharedViewModel @Inject constructor (val repository: PostRepository) : Vie
             }
 
             Action.DELETE -> {
-
+                deletePost()
             }
 
             Action.DELETE_ALL -> {
@@ -98,6 +120,7 @@ class SharedViewModel @Inject constructor (val repository: PostRepository) : Vie
 
             }
         }
+
         this.action.value = Action.N0_ACTION
     }
 

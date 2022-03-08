@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import com.example.facebookclone.navigation.destinations.homeComposable
 import com.example.facebookclone.navigation.destinations.mainScreenComposable
 import com.example.facebookclone.navigation.destinations.postComposable
+import com.example.facebookclone.navigation.destinations.postDetailScreen
 import com.example.facebookclone.ui.viewmodel.SharedViewModel
 import com.example.facebookclone.util.Constants.HOME_SCREEN
 import com.example.facebookclone.util.Constants.MAIN_SCREEN
@@ -20,9 +21,23 @@ fun SetupNavigation(navController: NavHostController, sharedViewModel: SharedVie
 
 
     NavHost(navController = navController, startDestination = MAIN_SCREEN ) {
-        mainScreenComposable(navigateToPostScreen = screen.post, sharedViewModel = sharedViewModel)
-        homeComposable(navigateToPostScreen = screen.post, sharedViewModel = sharedViewModel)
-        postComposable(navigateToHomeScreen = screen.home, sharedViewModel = sharedViewModel)
-
+        mainScreenComposable(
+            navigateToPostScreen = screen.post,
+            sharedViewModel = sharedViewModel,
+            navigateToPostDetailScreen = screen.postDetailScreen
+        )
+        homeComposable(
+            navigateToPostScreen = screen.post,
+            navigateToPostDetailScreen = screen.postDetailScreen,
+            sharedViewModel = sharedViewModel
+        )
+        postComposable(
+            navigateToHomeScreen = screen.home,
+            sharedViewModel = sharedViewModel
+        )
+        postDetailScreen(
+            navigateToHomeScreen = screen.home,
+            sharedViewModel = sharedViewModel
+        )
     }
 }

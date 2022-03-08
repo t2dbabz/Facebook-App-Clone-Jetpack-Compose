@@ -15,7 +15,7 @@ import com.google.accompanist.pager.rememberPagerState
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalPagerApi::class)
 @Composable
-fun MainScreen(navigateToPostScreen: (Int) -> Unit, sharedViewModel: SharedViewModel) {
+fun MainScreen(navigateToPostScreen: (Int) -> Unit, navigateToPostDetailScreen: (Int) -> Unit, sharedViewModel: SharedViewModel) {
     val tabs = listOf(TabItem.Home, TabItem.Friends, TabItem.Watch, TabItem.Profile, TabItem.Notification, TabItem.Menu)
     val pagerState = rememberPagerState()
     Scaffold(
@@ -27,6 +27,7 @@ fun MainScreen(navigateToPostScreen: (Int) -> Unit, sharedViewModel: SharedViewM
                 tabs = tabs,
                 pagerState = pagerState,
                 navigateToPostScreen,
+                navigateToPostDetailScreen,
                 sharedViewModel = sharedViewModel
             )
         }

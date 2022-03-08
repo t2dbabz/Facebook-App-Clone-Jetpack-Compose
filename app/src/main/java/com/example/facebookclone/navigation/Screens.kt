@@ -22,13 +22,16 @@ class Screens(navController: NavHostController){
     }
 
     val mainScreen: (Action) -> Unit = { action ->
-        navController.navigate(route = "screen/${action.name}"){
+        navController.navigate(route = "main_screen/${action.name}"){
             popUpTo(HOME_SCREEN) {
                 inclusive = true
             }
 
         }
+    }
 
+    val postDetailScreen: (Int) -> Unit = {postId ->
+        navController.navigate(route = "post_detail_screen/$postId")
     }
 
 

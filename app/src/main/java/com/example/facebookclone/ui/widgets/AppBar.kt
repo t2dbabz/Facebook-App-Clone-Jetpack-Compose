@@ -18,6 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.facebookclone.R
+import com.example.facebookclone.ui.theme.iconBackground
+import com.example.facebookclone.ui.theme.logoBlue
 import com.example.facebookclone.ui.theme.topAppBarBackgroundColor
 import com.example.facebookclone.ui.theme.topAppBarContentColor
 
@@ -26,7 +28,7 @@ import com.example.facebookclone.ui.theme.topAppBarContentColor
 fun AppBar() {
     TopAppBar(
         title = {
-        Text(text = "facebook", color = Color.Blue, fontSize = 30.sp, fontWeight = FontWeight.ExtraBold)
+        Text(text = "facebook", color = MaterialTheme.colors.logoBlue, fontSize = 30.sp, fontWeight = FontWeight.ExtraBold)
     },
         actions = {
                   AppBarActions()
@@ -51,7 +53,7 @@ fun SearchAction(onSearchClicked: () -> Unit) {
         onClick = { onSearchClicked},
         modifier = Modifier
             .clip(CircleShape)
-            .background(Color.LightGray)
+            .background(MaterialTheme.colors.iconBackground)
             .size(40.dp)) {
         Icon(imageVector = Icons.Filled.Search, contentDescription = "Search Icon", tint = MaterialTheme.colors.topAppBarContentColor )
     }
@@ -63,7 +65,7 @@ fun MessengerAction(onMessengerClicked: () -> Unit) {
         onClick = { onMessengerClicked },
         modifier = Modifier
             .clip(CircleShape)
-            .background(Color.LightGray)
+            .background(MaterialTheme.colors.iconBackground)
             .size(40.dp)
         ) {
         Icon(painter = painterResource(id = R.drawable.ic_messenger_fill) , contentDescription ="Messenger", tint = MaterialTheme.colors.topAppBarContentColor )

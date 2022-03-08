@@ -7,14 +7,14 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PostDao {
 
-    @Query("SELECT * FROM post_table ORDER BY id")
+    @Query("SELECT * FROM post_table ORDER BY id DESC")
     fun getAllPosts() : Flow<List<Post>>
 
     @Query("SELECT * FROM post_table WHERE id = :postId")
     fun getSelectedPost(postId: Int) : Flow<Post>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addPost(post: Post)
+    suspend fun addPost(vararg post: Post)
 
     @Update
     suspend fun updatePost(post: Post)

@@ -14,6 +14,7 @@ import com.example.facebookclone.ui.screens.menu.MenuScreen
 import com.example.facebookclone.ui.screens.notification.NotificationScreen
 import com.example.facebookclone.ui.screens.profile.ProfileScreen
 import com.example.facebookclone.ui.screens.watch.WatchScreen
+import com.example.facebookclone.ui.theme.logoBlue
 import com.example.facebookclone.ui.viewmodel.SharedViewModel
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
@@ -30,7 +31,7 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
         indicator = { tabPositions ->
             TabRowDefaults.Indicator(
                 Modifier.pagerTabIndicatorOffset(pagerState, tabPositions),
-                color = Color.Blue
+                color = MaterialTheme.colors.logoBlue
             )},
         divider = {
             TabRowDefaults.Divider(thickness = 0.3.dp, color = Color.DarkGray)
@@ -40,10 +41,13 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
             val selected = pagerState.currentPage == index
 
             Tab(
-                icon = { Icon(painter = painterResource(id = tab.icon), contentDescription = tab.title, tint = if (selected) Color.Blue else Color.DarkGray) },
+                icon = { Icon(
+                    painter = painterResource(id = tab.icon),
+                    contentDescription = tab.title,
+                    tint = if (selected) MaterialTheme.colors.logoBlue else Color.DarkGray
+                ) },
                 selected = selected,
                 onClick = {
-                    tab
                     scope.launch {
                         pagerState.animateScrollToPage(index)
                     }
@@ -56,10 +60,20 @@ fun Tabs(tabs: List<TabItem>, pagerState: PagerState) {
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun TabsContent(tabs: List<TabItem>, pagerState: PagerState, navigateToPost: (Int) -> Unit, sharedViewModel: SharedViewModel) {
+fun TabsContent(
+    tabs: List<TabItem>,
+    pagerState: PagerState,
+    navigateToPost: (Int) -> Unit,
+    navigateToPostDetailScreen: (Int) -> Unit,
+    sharedViewModel: SharedViewModel
+) {
     HorizontalPager(count = tabs.size, state = pagerState) { page ->
         when(page) {
-                0 -> HomeScreen (navigateToPostScreen = navigateToPost, sharedViewModel = sharedViewModel )
+                0 -> HomeScreen(
+                    navigateToPostScreen = navigateToPost,
+                    navigateToPostDetailScreen = navigateToPostDetailScreen,
+                    sharedViewModel = sharedViewModel
+                )
                 1 -> FriendsScreen()
                 2 -> WatchScreen()
                 3 -> ProfileScreen()

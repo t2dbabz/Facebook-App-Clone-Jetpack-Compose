@@ -6,11 +6,11 @@ import com.example.facebookclone.ui.screens.mainscreen.MainScreen
 import com.example.facebookclone.ui.viewmodel.SharedViewModel
 import com.example.facebookclone.util.Constants
 
-fun NavGraphBuilder.mainScreenComposable(navigateToPostScreen: (Int) -> Unit, sharedViewModel: SharedViewModel) {
+fun NavGraphBuilder.mainScreenComposable(navigateToPostScreen: (Int) -> Unit,navigateToPostDetailScreen: (Int) -> Unit,  sharedViewModel: SharedViewModel) {
     composable(
         route = Constants.MAIN_SCREEN,
     ){
 
-        MainScreen(navigateToPostScreen = navigateToPostScreen, sharedViewModel = sharedViewModel)
+        MainScreen(navigateToPostScreen = navigateToPostScreen, navigateToPostDetailScreen = navigateToPostDetailScreen,  sharedViewModel = sharedViewModel)
     }
 }

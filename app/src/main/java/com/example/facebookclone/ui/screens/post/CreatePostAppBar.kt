@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.facebookclone.ui.theme.logoBlue
 import com.example.facebookclone.ui.theme.postItemTextColor
 import com.example.facebookclone.ui.theme.topAppBarBackgroundColor
 import com.example.facebookclone.ui.theme.topAppBarContentColor
@@ -48,7 +49,7 @@ fun BackAction(onBackedClicked: (Action) -> Unit) {
 @Composable
 fun AddPostAction(onAddPostClicked: (Action) -> Unit) {
   Button(onClick = { onAddPostClicked(Action.ADD) }, colors = ButtonDefaults.buttonColors(
-      backgroundColor = Color.Blue,
+      backgroundColor = MaterialTheme.colors.logoBlue,
       contentColor = Color.White)) {
       Text(text = "Post")
   }

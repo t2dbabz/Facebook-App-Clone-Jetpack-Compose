@@ -16,7 +16,11 @@ import com.example.facebookclone.util.Constants.POST_ARGUMENT_KEY
 import com.example.facebookclone.util.toAction
 
 
-fun NavGraphBuilder.homeComposable(navigateToPostScreen: (postId: Int) -> Unit, sharedViewModel: SharedViewModel) {
+fun NavGraphBuilder.homeComposable(
+    navigateToPostScreen: (postId: Int) -> Unit,
+    navigateToPostDetailScreen: (Int) -> Unit,
+    sharedViewModel: SharedViewModel
+) {
     composable(
         route = Constants.HOME_SCREEN,
         arguments = listOf(navArgument(HOME_ARGUMENT_KEY){
@@ -33,6 +37,6 @@ fun NavGraphBuilder.homeComposable(navigateToPostScreen: (postId: Int) -> Unit, 
             sharedViewModel.action.value = action
         } )
 
-        MainScreen(navigateToPostScreen = navigateToPostScreen, sharedViewModel = sharedViewModel )
+        MainScreen(navigateToPostScreen = navigateToPostScreen, navigateToPostDetailScreen = navigateToPostDetailScreen, sharedViewModel = sharedViewModel )
     }
 }

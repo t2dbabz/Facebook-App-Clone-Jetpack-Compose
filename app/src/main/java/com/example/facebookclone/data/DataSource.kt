@@ -8,24 +8,22 @@ object DataSource {
     fun post() : List<Post> {
         return listOf(
             Post(
-                id = 0,
-                name = "Victor Owoleke",
-                profilePicture = R.drawable.profile_image,
-                status = "This is a new beginning. Let do this",
-                postImage = R.drawable.test_image,
-                time = "2h",
+                name = "Kathrin Romany Beckinsale",
+                profilePicture = R.drawable.profile_pic_1,
+                status = "This is a new beginning. Live Life and Excel",
+                postImage = R.drawable.profile_pic_1,
+                time = "5h",
                 comments = "200 Comments",
                 views = "2.5k Views"
             ),
             Post(
-                id = 4,
-                name = "Ben Owoleke",
-                profilePicture = R.drawable.profile_image,
-                status = "This is a new Oyaoo. Let do this",
-                postImage = R.drawable.test_image,
+                name = "scarlett johansson",
+                profilePicture = R.drawable.profile_pic_2,
+                status = "New Year, New Me, New Goals, Let's Go",
+                postImage = R.drawable.profile_pic_2,
                 time = "2h",
-                comments = "200 Comments",
-                views = "2.5k Views"
+                comments = "1000 Comments",
+                views = "4.5k Views"
             ),
 
         )

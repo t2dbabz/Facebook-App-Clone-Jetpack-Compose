@@ -1,8 +1,6 @@
 package com.example.facebookclone.ui.screens.home
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,7 +8,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.outlined.ThumbUp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -33,22 +30,25 @@ import androidx.compose.ui.unit.sp
 import com.example.facebookclone.R
 import com.example.facebookclone.data.DataSource
 import com.example.facebookclone.data.model.Post
-import com.example.facebookclone.ui.theme.postItemBackgroundColor
-import com.example.facebookclone.ui.theme.postItemTextColor
-import com.example.facebookclone.ui.theme.topAppBarBackgroundColor
+import com.example.facebookclone.ui.theme.*
 import com.example.facebookclone.ui.viewmodel.SharedViewModel
 import com.example.facebookclone.util.RequestState
 
 @Composable
-fun HomeScreen(navigateToPostScreen: (Int) ->Unit, sharedViewModel: SharedViewModel) {
+fun HomeScreen(
+    navigateToPostScreen: (Int) -> Unit,
+    navigateToPostDetailScreen: (Int) -> Unit,
+    sharedViewModel: SharedViewModel
+) {
     LaunchedEffect(key1 = true, block = {
 
         sharedViewModel.getAllPosts()
     })
 
     val allTasks by sharedViewModel.allPosts.collectAsState()
+
     val action by sharedViewModel.action
-    val data =  DataSource.post()
+   
     sharedViewModel.handleDatabaseActions(action)
     LazyColumn(modifier = Modifier.fillMaxSize(),content ={
         item {
@@ -58,19 +58,12 @@ fun HomeScreen(navigateToPostScreen: (Int) ->Unit, sharedViewModel: SharedViewMo
         }
 
         if (allTasks is RequestState.Success) {
-            if ((allTasks as RequestState.Success<List<Post>>).data.isEmpty()) {
-                items(items = data, itemContent = { post ->
-                    PostItem(post)
-                    Divider(modifier = Modifier.padding(horizontal = 15.dp),color = Color.LightGray, thickness = 0.5.dp)
-                })
-            } else {
-
-                items(items = (allTasks as RequestState.Success<List<Post>>).data, itemContent = { post ->
-                    PostItem(post)
-                    Divider(modifier = Modifier.padding(horizontal = 15.dp),color = Color.LightGray, thickness = 0.5.dp)
-                })
-            }
+            items(items = (allTasks as RequestState.Success<List<Post>>).data, itemContent = { post ->
+                PostItem(post, navigateToPostDetailScreen)
+                Divider(thickness = 5.dp, color = Color.LightGray)
+            })
         }
+
 
     } )
 
@@ -125,16 +118,18 @@ fun AddPostContent(navigateToPostScreen: (Int) -> Unit) {
                     modifier = Modifier.padding(start = 16.dp),
                     painter = painterResource(id = R.drawable.ic_media),
                     contentDescription = "Media",
-                    tint = Color.Green
+                    tint = MaterialTheme.colors.mediaGreen
                 )
             }
         }
 }
 
 @Composable
-fun PostItem(post: Post) {
+fun PostItem(post: Post, navigateToPostDetailScreen: (Int) -> Unit) {
     Surface(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().clickable {
+              navigateToPostDetailScreen(post.id)
+        },
         color = MaterialTheme.colors.postItemBackgroundColor,
         shape = RectangleShape
     ) {
@@ -161,12 +156,12 @@ fun PostItem(post: Post) {
                        color = MaterialTheme.colors.postItemTextColor,
                        fontWeight = FontWeight.Bold
                    )
-
                     Row(
-                        verticalAlignment = Alignment.CenterVertically,
+                        verticalAlignment = Alignment.Top,
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         Text(text =post.time, fontSize = 10.sp, color = Color.DarkGray)
+                        Text(text = '\u00B7'.toString(), fontSize = 10.sp, color = Color.DarkGray, modifier = Modifier.padding(start = 2.dp), fontWeight = FontWeight.ExtraBold)
                         Icon(
                             painter = painterResource(id = R.drawable.ic_earth),
                             contentDescription = "Earth",
@@ -200,14 +195,14 @@ fun PostItem(post: Post) {
                 .height(350.dp), contentScale = ContentScale.Crop, )
 
             Row(modifier = Modifier.padding(10.dp)){
-                Text(text = post.comments, modifier = Modifier.weight(1f), color = MaterialTheme.colors.postItemTextColor)
-                Text(text = post.views, modifier = Modifier.weight(1f), textAlign = TextAlign.End, color = MaterialTheme.colors.postItemTextColor)
+                Text(text = post.comments, modifier = Modifier.weight(1f), color = MaterialTheme.colors.textGrey)
+                Text(text = post.views, modifier = Modifier.weight(1f), textAlign = TextAlign.End, color = MaterialTheme.colors.textGrey)
 
             }
 
-            Divider(modifier = Modifier.padding(start = 5.dp , end = 5.dp, bottom = 5.dp), thickness = 1.5.dp)
+            Divider(modifier = Modifier.padding(start = 5.dp , end = 5.dp, bottom = 2.dp), thickness = 1.5.dp)
 
-            Row() {
+            Row {
                 TextButton(
                     onClick = {
                         // do something here
@@ -218,9 +213,9 @@ fun PostItem(post: Post) {
                         imageVector = Icons.Outlined.ThumbUp,
                         contentDescription = "Localized description",
                         modifier = Modifier.padding(end = 8.dp),
-                        tint = Color.LightGray
+                        tint = MaterialTheme.colors.iconGrey
                     )
-                    Text(text = "Like", color = Color.DarkGray)
+                    Text(text = "Like", color = MaterialTheme.colors.iconGrey)
                 }
 
                 TextButton(
@@ -233,9 +228,9 @@ fun PostItem(post: Post) {
                         painter = painterResource(id = R.drawable.ic_chat_4),
                         contentDescription = "Localized description",
                         modifier = Modifier.padding(end = 8.dp),
-                        tint = Color.LightGray
+                        tint = MaterialTheme.colors.textGrey
                     )
-                    Text(text = "Comment", color = Color.DarkGray)
+                    Text(text = "Comment", color = MaterialTheme.colors.iconGrey)
                 }
 
 
@@ -249,9 +244,9 @@ fun PostItem(post: Post) {
                         painter = painterResource(id = R.drawable.ic_share_forward_line),
                         contentDescription = "Localized description",
                         modifier = Modifier.padding(end = 8.dp),
-                        tint = Color.LightGray
+                        tint = MaterialTheme.colors.iconGrey
                     )
-                    Text(text = "Share", color = Color.DarkGray)
+                    Text(text = "Share", color = MaterialTheme.colors.iconGrey)
                 }
             }
         }
